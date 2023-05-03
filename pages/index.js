@@ -1,8 +1,8 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { Fragment } from "react";
-import AllNews from "../components/homepage/all-news";
 import { getAllNewsPosts } from "../helpers/api-util";
+import NewsList from "../components/news/news-list";
 
 const Home = (props) => {
   const { allPosts } = props;
@@ -13,14 +13,14 @@ const Home = (props) => {
         <title>Curated News</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <AllNews posts={allPosts} />
+      <NewsList posts={allPosts} />
     </>
   );
 };
 
 export default Home;
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const data = await getAllNewsPosts();
 
   if (data.articles) {

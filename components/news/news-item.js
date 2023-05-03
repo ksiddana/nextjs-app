@@ -1,9 +1,8 @@
 import React from "react";
-import Image from "next/image";
-import styles from "./post-item.module.css";
+import styles from "./news-item.module.css";
 import Link from "next/link";
 
-function PostItem(props) {
+function NewsItem(props) {
   const { source, title, description, articleUrl, image, content, date } = props;
   const formattedDate = new Date(date).toLocaleDateString('en-US', {
     day: 'numeric',
@@ -25,4 +24,4 @@ function PostItem(props) {
   );
 }
 
-export default PostItem;
+export default NewsItem;

@@ -1,12 +1,12 @@
 import React from "react";
-import PostItem from "../posts/post-item";
+import NewsItem from "./news-item";
 
-const AllNews = (props) => {
+const NewsList = (props) => {
   const { posts } = props;
   return (
     <ul>
       {posts.map((post) => (
-        <PostItem
+        <NewsItem
           key={post.title}
           source={post.source.name}
           title={post.title}
@@ -21,4 +21,4 @@ const AllNews = (props) => {
   );
 };
 
-export default AllNews;
+export default NewsList;
