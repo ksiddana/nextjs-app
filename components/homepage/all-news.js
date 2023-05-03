@@ -14,6 +14,7 @@ const AllNews = (props) => {
           image={post.urlToImage}
           content={post.content}
           articleUrl={post.url}
+          date={post.publishedAt}
         />
       ))}
     </ul>

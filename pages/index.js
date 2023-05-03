@@ -6,9 +6,6 @@ import { getAllNewsPosts } from '../helpers/api-util';
 const Home = (props) => {
   const { allPosts } = props;
   
-  console.log("Karun");
-  console.log(allPosts);
-  
   return (
     <Fragment>
       <AllNews posts={allPosts} />
@@ -29,11 +26,4 @@ export const getStaticProps = async () => {
       }
     }
   }
-
-  return {
-    props: {
-      error: data.error
-    }
-  }
-  
 }
