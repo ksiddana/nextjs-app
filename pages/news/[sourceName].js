@@ -1,15 +1,25 @@
-import React from 'react'
+import React, { Fragment }from 'react'
 import NewsList from '@/components/news/news-list'
 import { getTopHeadlinesOrEverythingNewsSource } from '@/helpers/api-util'
 
 const sourceNameMap = {
   'techcrunch': { id: 'techcrunch', apiRoute: 'top-headlines'},
   'hackernews': { id: 'hacker-news', apiRoute: 'everything' },
-  'bbc': { id: 'bbc-news', apiRoute: 'top-headlines'}
+  'bbc': { id: 'bbc-news', apiRoute: 'top-headlines'},
+  'reuters': { id: 'reuters', apiRoute: 'top-headlines' },
+  'cnn': { id: 'cnn', apiRoute: 'top-headlines'}
 }
 
 const SubCategoryNewsList = (props) => {
-  const { detailedPosts } = props;
+  const { detailedPosts, error } = props;
+  
+  if (error) {
+    return <Fragment>
+      <div>{error.message}</div>
+    </Fragment>
+    
+  }
+  
   return (
     <NewsList posts={detailedPosts} />
   )
@@ -23,11 +33,17 @@ export const getServerSideProps = async (context) => {
   //console.log(sourceId);
 
   const data = await getTopHeadlinesOrEverythingNewsSource(sourceMap);
-  if (data.articles) {
+  if (data.sortedPosts) {
     return {
       props: {
-        detailedPosts: data.articles
+        detailedPosts: data.sortedPosts
       }
+    }
+  }
+
+  return {
+    props: {
+      error: { ...data }
     }
   }
 }

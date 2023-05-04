@@ -5,7 +5,14 @@ import { getAllNewsPosts } from "../helpers/api-util";
 import NewsList from "../components/news/news-list";
 
 const Home = (props) => {
-  const { allPosts } = props;
+  const { allPosts, error } = props;
+
+  if (error) {
+    return <Fragment>
+      <div>{error.message}</div>
+    </Fragment>
+    
+  }
 
   return (
     <>
@@ -23,11 +30,18 @@ export default Home;
 export const getServerSideProps = async () => {
   const data = await getAllNewsPosts();
 
-  if (data.articles) {
+  if (data.sortedPosts) {
     return {
       props: {
-        allPosts: data.articles,
+        allPosts: data.sortedPosts,
       },
     };
   }
+
+  return {
+    props: {
+      error: {...data }
+    }
+  }
+
 };

@@ -5,8 +5,12 @@ export const getAllNewsPosts = async () => {
     `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
   );
   const data = await response.json();
-  const sortedPosts = sortPosts(data.articles);
-  return { ...data, sortedPosts };
+  if (data.status !== 'error') {
+    const sortedPosts = sortPosts(data.articles);
+    return { ...data, sortedPosts };
+  }
+
+  return data;
 };
 
 export const sortPosts = (posts) => {
@@ -19,8 +23,13 @@ export const sortPosts = (posts) => {
 export const getTopHeadlinesOrEverythingNewsSource = async ({ id, apiRoute }) => {
     const response = await fetch(`https://newsapi.org/v2/${apiRoute}?sources=${id}&apiKey=${API_KEY}`)
     const data = await response.json();
-    const sortedPosts = sortPosts(data.articles);
-    return { ...data, sortedPosts };
+    
+    if (data.status !== 'error') {
+        const sortedPosts = sortPosts(data.articles);
+        return { ...data, sortedPosts };
+    }
+
+    return data;
 }
 
 export const getEverythingNewsSource = async (sourceId) => {

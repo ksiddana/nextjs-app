@@ -10,6 +10,8 @@ function NavigationSideBar() {
             <li><Link href="/news/techcrunch">Tech Crunch</Link></li>
             <li><Link href="/news/hackernews">Hacker News</Link></li>
             <li><Link href="/news/bbc">BBC</Link></li>
+            <li><Link href="/news/reuters">Reuters</Link></li>
+            <li><Link href="/news/cnn">CNN</Link></li>
         </ul>
     </nav>
   )
